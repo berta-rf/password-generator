@@ -169,8 +169,11 @@ function generatePassword() {
     }
 
   }
-  console.log(password);
-  
+
+  if (password.length > passLength) {
+    password = password.slice(0, passLength);
+  }
+
   // shuffles the generated characters
   let shuffledPassword = password.split("").sort(() => 0.5 - Math.random()).join("");
 
