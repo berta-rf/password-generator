@@ -100,11 +100,6 @@ var upperCasedCharacters = [
 // Code should validate for each input and at least one character type should be selected
 // Once prompts are answered then the password should be generated and displayed in an alert or written to the page
 
-const passLength = prompt("How long would you like your password to be? (10 to 64 characters)");
-const withLowerCase = confirm("Would you like to include Lower Case Characters?");
-const withUpperCase = confirm("Would you like to include Upper Case Characters?");
-const withNumbers = confirm("Would you like to include Numbers?");
-const withSpecialChar = confirm("Would you like to include Special Characters?");
 
 let passLength = 0;
 
@@ -114,7 +109,7 @@ let withNumbers = false;
 let withSpecialChar = false;
 
 function getPasswordOptions() {
-
+  
   while (passLength < 10 || passLength > 64) {
     
     passLength = Number(prompt("How long would you like your password to be?"));
@@ -137,16 +132,48 @@ function getPasswordOptions() {
         
     if (!withLowerCase && !withUpperCase && !withNumbers && !withSpecialChar)
     alert("Please choose at least one character type");
-}
+  }
 
 }
+
+// Function to prompt user for password options
+
 // Function for getting a random element from an array
 function getRandom(arr) {
 
+    x = arr[Math.floor(Math.random()*arr.length)];
+    return x;
 }
+  
 
 // Function to generate password with user input
 function generatePassword() {
+  
+  getPasswordOptions();
+
+  let password = "";
+
+  while (password.length <= passLength) {
+    
+    if (withLowerCase) {
+      password += getRandom(lowerCasedCharacters);
+    }
+    if (withUpperCase) {
+      password += getRandom(upperCasedCharacters);
+    }
+    if (withNumbers) {
+      password += getRandom(numericCharacters);
+    }
+    if (withSpecialChar) {
+      password += getRandom(specialCharacters);
+    }
+
+  }
+  console.log(password);
+  // shuffles the generated characters
+  let shuffledPassword = password.split("").sort(() => 0.5 - Math.random()).join("");
+
+  return shuffledPassword;
 
 }
 
@@ -157,7 +184,7 @@ var generateBtn = document.querySelector('#generate');
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector('#password');
-
+  
   passwordText.value = password;
 }
 
