@@ -106,12 +106,40 @@ const withUpperCase = confirm("Would you like to include Upper Case Characters?"
 const withNumbers = confirm("Would you like to include Numbers?");
 const withSpecialChar = confirm("Would you like to include Special Characters?");
 
+let passLength = 0;
 
-// Function to prompt user for password options
+let withLowerCase = false;
+let withUpperCase = false;
+let withNumbers = false;
+let withSpecialChar = false;
+
 function getPasswordOptions() {
 
+  while (passLength < 10 || passLength > 64) {
+    
+    passLength = Number(prompt("How long would you like your password to be?"));
+    console.log(passLength);
+    
+    if (passLength < 10 || passLength > 64) {
+      alert("Please type a number between 10 and 64");
+    }
+  }
+
+  alert(`You want a password that is ${passLength} characters long`);
+
+  while (!withLowerCase && !withUpperCase && !withNumbers && !withSpecialChar) {
+    
+    
+    withLowerCase = confirm("Would you like to include Lower Case Characters?");
+    withUpperCase = confirm("Would you like to include Upper Case Characters?");
+    withNumbers = confirm("Would you like to include Numbers?");
+    withSpecialChar = confirm("Would you like to include Special Characters?");
+        
+    if (!withLowerCase && !withUpperCase && !withNumbers && !withSpecialChar)
+    alert("Please choose at least one character type");
 }
 
+}
 // Function for getting a random element from an array
 function getRandom(arr) {
 
