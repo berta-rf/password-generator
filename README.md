@@ -21,9 +21,9 @@ This application is a random password generator.
 The user must be able to:
 
 - Generate a password when the button is clicked.
-- Present a series of prompts for password criteria:
+- Get presented with a series of prompts for password criteria:
 
-    - Length of password: At least 10 characters but no more than 64.
+    - Length of password: At least 10 characters but no     more than 64.
 
     - Character types:
 
@@ -35,7 +35,7 @@ The user must be able to:
 
         - Special characters ($@%&*, etc.)
 
-- Once all prompts are answered, the password should be generated and displayed on the page.
+- Once all prompts are answered, view the password siplayed on the page.
 
 ### Screenshot
 
