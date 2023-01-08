@@ -88,55 +88,44 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-// Generate a password when the button is clicked
-// Present a series of prompts for password criteria
-// Length of password
-// At least 10 characters but no more than 64.
-// Character types
-// Lowercase
-// Uppercase
-// Numeric
-// Special characters ($@%&*, etc)
-// Code should validate for each input and at least one character type should be selected
-// Once prompts are answered then the password should written to the page
-
-
-let passLength = 0;
-
-let withLowerCase = false;
-let withUpperCase = false;
-let withNumbers = false;
-let withSpecialChar = false;
+// Function to prompt user for password options
 
 function getPasswordOptions() {
+
+  let options = {
+    passLength: 0,
+    withUpperCase: false,
+    withLowerCase: false,
+    withNumbers: false,
+    withSpecialChar: false,
+  }
   
-  while (passLength < 10 || passLength > 64) {
+  while (options.passLength < 10 || options.passLength > 64) {
     
-    passLength = Number(prompt("How long would you like your password to be?"));
-    console.log(passLength);
+    options.passLength = Number(prompt("How long would you like your password to be?"));
+    console.log(options.passLength);
     
-    if (passLength < 10 || passLength > 64) {
+    if (options.passLength < 10 || options.passLength > 64) {
       alert("Please type a number between 10 and 64");
     }
   }
 
-  alert(`You want a password that is ${passLength} characters long`);
+  alert(`You want a password that is ${options.passLength} characters long`);
 
-  while (!withLowerCase && !withUpperCase && !withNumbers && !withSpecialChar) {
+  while (!options.withLowerCase && !options.withUpperCase && !options.withNumbers && !options.withSpecialChar) {
     
-    
-    withLowerCase = confirm("Would you like to include Lower Case Characters?");
-    withUpperCase = confirm("Would you like to include Upper Case Characters?");
-    withNumbers = confirm("Would you like to include Numbers?");
-    withSpecialChar = confirm("Would you like to include Special Characters?");
+    options.withLowerCase = confirm("Would you like to include Lower Case Characters?");
+    options.withUpperCase = confirm("Would you like to include Upper Case Characters?");
+    options.withNumbers = confirm("Would you like to include Numbers?");
+    options.withSpecialChar = confirm("Would you like to include Special Characters?");
         
-    if (!withLowerCase && !withUpperCase && !withNumbers && !withSpecialChar)
+    if (!options.withLowerCase && !options.withUpperCase && !options.withNumbers && !options.withSpecialChar)
     alert("Please choose at least one character type");
   }
 
-}
+  return options;
 
-// Function to prompt user for password options
+}
 
 // Function for getting a random element from an array
 function getRandom(arr) {
@@ -145,40 +134,37 @@ function getRandom(arr) {
     return x;
 }
   
-
 // Function to generate password with user input
 function generatePassword() {
   
-  getPasswordOptions();
+  const options = getPasswordOptions();
 
   let password = "";
 
-  while (password.length <= passLength) {
+  while (password.length <= options.passLength) {
     
-    if (withLowerCase) {
+    if (options.withLowerCase) {
       password += getRandom(lowerCasedCharacters);
     }
-    if (withUpperCase) {
+    if (options.withUpperCase) {
       password += getRandom(upperCasedCharacters);
     }
-    if (withNumbers) {
+    if (options.withNumbers) {
       password += getRandom(numericCharacters);
     }
-    if (withSpecialChar) {
+    if (options.withSpecialChar) {
       password += getRandom(specialCharacters);
     }
-
   }
 
-  if (password.length > passLength) {
-    password = password.slice(0, passLength);
+  if (password.length > options.passLength) {
+    password = password.slice(0, options.passLength);
   }
 
   // shuffles the generated characters
   let shuffledPassword = password.split("").sort(() => 0.5 - Math.random()).join("");
 
   return shuffledPassword;
-
 }
 
 // Get references to the #generate element
