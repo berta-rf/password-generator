@@ -39,7 +39,7 @@ The user must be able to:
 
 ### Screenshot
 
-![](./05-javascript-challenge-demo.png)
+![](./assets/images/05-javascript-challenge-demo.png/05-javascript-challenge-demo.png)
 
 ### Links
 
